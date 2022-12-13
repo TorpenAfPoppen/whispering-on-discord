@@ -1,0 +1,15 @@
+#discord
+#discord.py==1.6.0
+#discord.py
+#discord.py[voice]
+#discord-ext-audiorec
+py-cord
+py-cord[voice]
+python-dotenv==0.15.0
+youtube-dl==2021.12.17
+yt-dlp
+PyNaCl
+opuslib
+soundfile
+scipy
+pydub
