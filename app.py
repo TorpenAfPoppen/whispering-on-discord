@@ -28,7 +28,7 @@ import whisper
 
 
 
-model = whisper.load_model("small")
+model = whisper.load_model("small", download_root="./models")
 #options = whisper.DecodingOptions(language= 'en', fp16=False)
 
 
