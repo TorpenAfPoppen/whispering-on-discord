@@ -28,7 +28,7 @@ import whisper
 
 
 
-model = whisper.load_model("base")
+model = whisper.load_model("small")
 #options = whisper.DecodingOptions(language= 'en', fp16=False)
 
 
@@ -120,28 +120,25 @@ async def once_done(sink, channel: discord.TextChannel, *args):
 
     #tf = tempfile.NamedTemporaryFile(suffix="wav")
     
-    # with open("testfiles.mp3", "wb") as tf:
-
-    #     tf.write(files[0].fp.read())
-    #     tf.seek(0)
-        #print(tf.read()[:100])
-        #tf.seek(0)
+    with open("testfiles.wav", "wb") as tf:
+        tf.write(files[0].fp.read())
+    
     #print(bytes_to_float(files[0].fp.read()))
     
     
-    sampling_rate, data = mp3_read(files[0].fp)
-    print(data[:100])
-    print(data.shape)
+    # sampling_rate, data = mp3_read(files[0].fp)
+    # print(data[:100])
+    # print(data.shape)
 
-    # Your new sampling rate
-    new_rate = 16000
-    # Read file
-    #sampling_rate, data = mp3file.read(tf)
-    print(data[:100], sampling_rate)
-    # Resample data
-    number_of_samples = round(len(data) * float(new_rate) / sampling_rate)
-    data = sps.resample(data, number_of_samples)
-    print(data[:100])
+    # # Your new sampling rate
+    # new_rate = 16000
+    # # Read file
+    # #sampling_rate, data = mp3file.read(tf)
+    # print(data[:100], sampling_rate)
+    # # Resample data
+    # number_of_samples = round(len(data) * float(new_rate) / sampling_rate)
+    # data = sps.resample(data, number_of_samples)
+    # print(data[:100])
     # print(sampling_rate)
     #print(files)
     #print(files[0])
@@ -170,7 +167,9 @@ async def once_done(sink, channel: discord.TextChannel, *args):
     #     print(n)
     #     print(wav_file)
 
-    whisper_result = model.transcribe(data, fp16=False)
+    # data = bytes_to_float(files[0].fp.read())
+
+    whisper_result = model.transcribe("testfiles.wav", fp16=False, language='da')
     print(whisper_result)
     files[0].fp.seek(0)
     await channel.send(
@@ -205,8 +204,8 @@ async def start(ctx: discord.ApplicationContext):
     connections.update({ctx.guild.id: vc})
 
     vc.start_recording(
-        #discord.sinks.WaveSink(),
-        discord.sinks.MP3Sink(),
+        discord.sinks.WaveSink(),
+        # discord.sinks.MP3Sink(),
         once_done,
         ctx.channel,
     )
