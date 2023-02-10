@@ -13,3 +13,9 @@ opuslib
 soundfile
 scipy
 pydub
+torch
+#torchaudio<0.12.0
+torchaudio
+tidalapi
+plyer
+ffmpeg-python
